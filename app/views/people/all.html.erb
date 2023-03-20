@@ -1,0 +1,28 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Anuncio</th>
+      <th scope="col">idade</th>
+      <th scope="col">Metodos</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @all_peoples.each do |persons| %>
+    <tr>
+      <th scope="row"><%= persons.id %></th>
+      <td><%= if persons.admin then "#{persons.admin.name} (admin)" else persons.name end %></td>
+      <td><%= persons.announcement %></td>
+      <td><%= persons.age %></td>
+      <td>
+        <%= link_to "Ver", persons , class:"btn btn-primary" %>
+        <% if admin_signed_in? %>
+           <%= link_to "Excluir", persons,  class:"btn btn-danger", data: {turbo_method: :delete } %>
+           <%= link_to "Editar", edit_person_path(persons) , class:"btn btn-success" %>
+        <% end %> 
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

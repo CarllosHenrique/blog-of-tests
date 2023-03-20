@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<%= root_path %>">Social</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <%= nav_link('Home', root_path, :get) %>
+          <%= nav_link('Pessoas cadastradas', people_all_path, :get) %>
+        <div class="admin">
+        <% if admin_signed_in?%>
+          <%= nav_link('Sair', destroy_admin_session_path, :delete) %>
+          <%= nav_link(current_admin.name, edit_admin_registration_path, :get) %>
+        <% else %>
+          <li class="nav-item">
+            <%= nav_link('Admin', new_admin_session_path, :get) %>
+          </li>
+        <% end%>
+        </div>
+    </div>
+  </div>
+</nav>

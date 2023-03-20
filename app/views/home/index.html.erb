@@ -1,0 +1,42 @@
+<%= link_to "ADD", new_person_path,  class:"btn btn-primary", style:"float: right;" %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Anuncio</th>
+      <th scope="col">idade</th>
+      <th scope="col">Metodos</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @registred_peoples.each do |persons| %>
+    <tr>
+      <th scope="row"><%= persons.id %></th>
+      <td><%= if persons.admin then persons.admin else persons.name end %></td>
+      <td><%= persons.announcement %></td>
+      <td><%= persons.age %></td>
+      <td>
+        <%= link_to "Ver", persons , class:"btn btn-primary" %>
+        <% if admin_signed_in? %>
+           <%= link_to "Excluir", persons,  class:"btn btn-danger", data: {turbo_method: :delete } %>
+           <%= link_to "Editar", edit_person_path(persons) , class:"btn btn-success" %>
+        <% end %> 
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<% if @big_person %>
+<div class="card text-center">
+  <div class="card-header">
+    <%= @big_person.name %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= @big_person.announcement %></h5>
+    <p class="card-text"><%= @big_person.age %></p>
+    <a href="<%= person_path(@big_person.id) %>" class="btn btn-primary">Clique</a>
+  </div>
+</div>
+<% end %>
